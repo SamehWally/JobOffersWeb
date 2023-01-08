@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Apply";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>ApplyForJob</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Apply">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                @if (ViewBag.Result !=null)
+                { 
+                    <h4>@ViewBag.Result</h4>
+                }
+            </div>
+            <div class="form-group">
+                @Html.Label("Message","Message",htmlAttributes:new{@class="control-label"})
+                @Html.TextArea("Message",htmlAttributes:new{@class="form-control"})
+                @Html.ValidationMessage("Message","",new{@class="text-danger"})
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

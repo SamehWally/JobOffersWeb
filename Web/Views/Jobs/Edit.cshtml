@@ -1,0 +1,87 @@
+﻿@model Job
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Job</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="alert alert-danger" id="error-div" style="display:none">
+                <span id="view-error">
+
+                </span>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="JobImage" />
+
+            <div class="form-group">
+                <label asp-for="JobTitle" class="control-label"></label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobContent" class="control-label"></label>
+                <input asp-for="JobContent" class="form-control" />
+                <span asp-validation-for="JobContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobImage" class="control-label"></label>
+                <img src="~/Uploads/@Html.DisplayFor(model => model.JobImage)" class="thumbnail" style="width:50px;height:50px;" />
+                <input id="myImage" type="file" name="File" asp-for="JobImage" class="form-control" />
+                <span asp-validation-for="JobImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" id="save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#save").click(function () {
+
+                //if ($("#jobImage").val() == "") {
+                //    $("#error-div").fadeIn();
+                //    $("#view-error").append("رجاء قم باختيار صورة");
+                //    return false;
+                //}
+                if ($("#myImage").val() != "") {
+                    var fileName = document.getElementById("myImage").value;
+                    var extensionImg = fileName.substr(fileName.lastIndexOf('.')+1);
+                    var validExtension = ['jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray(extensionImg, validExtension) == -1) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append("رجاء قم باختيار صورة بامتداد صحيح");
+                        return false;
+                    }
+
+                    var myFileSize = document.getElementById("myImage").files[0].size / 1024 / 1024;
+                    if (myFileSize > 2) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").append("رجاء قم باختيار صورة حجمها اقل من 2 ميجا بايت");
+                        return false;
+                    }
+                }
+
+            });
+        });
+    </script>
+}

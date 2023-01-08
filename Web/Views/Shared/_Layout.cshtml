@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Job_Offers_WebSite</title>
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+   
+    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/Content/Style.css" />
+    
+    @*<link rel="stylesheet" href="~/Job_Offers_WebSite.styles.css" asp-append-version="true" />*@
+</head>
+<body>
+
+    <!--Navbar-->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="vabar-header">
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand">
+                    <img src="~/Images/logo.png" class="logo-size" />
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            <i class="glyphicon glyphicon-home"></i>
+                            الرئيسية
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Jobs" asp-action="Index">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            الوظائف
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Roles" asp-action="Index">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            الصلاحيات
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Users" asp-action="Index">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            المستخدمين
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-info-sign"></i>
+                            حول الموقع
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            اتصل بنا
+                        </a>
+                    </li>
+
+                    <li>
+                        <form asp-controller="Home" asp-action="Search" method="post">
+                            <input type="text" name="searchName" id="searchName" class="searchName" placeholder="إبحث هنا..." />
+                        </form>
+                    </li>
+                </ul>
+
+                <!--Partial Login-->
+                @Html.Partial("_Login")
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row" style="min-height:550px;">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer class="navbar navbar-fixed-bottom myfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        من نحن؟
+                    </h3>
+                    <p>
+
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        <i class="glyphicon glyphicon-globe"></i>
+                        روابط هامة
+                    </h3>
+                    <ul>
+                        <li><a href="#">وظائف للقطاع العام</a></li>
+                        <li><a href="#">وظائف للقطاع الخاص</a></li>
+                        <li><a href="#">وظائف خارج البلاد</a></li>
+                        <li><a href="#">وظائف متنوعة</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        تواصل معنا
+                    </h3>
+                    <ul>
+                        <li><a href="#">صفحتنا على الفيسبوك</a></li>
+                        <li><a href="#">تابعنا على تويتر</a></li>
+                        <li><a href="#">شاهدنا على اليوتيوب</a></li>
+                        <li><a href="#">اترك لنا رسالة</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="subfooter">
+            <span>جميع الحقوق محفوظة لموقع التوظيف - 2022</span>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
